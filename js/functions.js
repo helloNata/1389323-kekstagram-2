@@ -30,43 +30,13 @@ const getPozitiveInteger = function(text) {
 //Программа выдает номер подьезда и этаж.
 //Входные параметры:
 //количество этажей
-//количество подъездов
 //количество квартир на площадке
 //номер квартиры
 
-const getEntrance = (countFloor, countEntrance, countFlatOnFloor, numberFlat) => {
-  const sumFlat = countFloor * countFlatOnFloor * countEntrance;
-  const countFlatOnEntrance = sumFlat / countEntrance;
-  const listEntrance = [];
-  const house = {};
-
-  for (let i = 1; i <= countEntrance; i++) {
-    listEntrance.push(i);
-  }
-
-  let numberFlatHouse = 0;
-  for (let i = 1; i <= countEntrance; i++) {
-    for (let j = 1; j <= countFlatOnEntrance; j++) {
-      numberFlatHouse ++;
-      house[numberFlatHouse] = [i];
-    }
-  }
-
-  let userFloor = 1;
-  const startNumber = countFlatOnEntrance * (house[numberFlat] - 1) + 1;
-
-  for (let i = 0; i < countFlatOnEntrance; i++) {
-    if ((i === 0 ? 1 : i) % countFlatOnFloor === 0) {
-      userFloor++ ;
-    }
-
-    if (startNumber + i === parseInt(numberFlat, 10)) {
-      break;
-    }
-  }
-
-  //console.log(`Подьезд ${ house[numberFlat]}. Этаж ${ userFloor} `);
-  return `Подьезд ${ house[numberFlat]}. Этаж ${ userFloor} `;
+const getEntrance = (countFloor, countFlatOnFloor, numberFlat) => {
+  const numberEntrance = Math.ceil(numberFlat / (countFloor * countFlatOnFloor));
+  const floor = (numberFlat % (countFloor * countFlatOnFloor) === 0) ? 9 : Math.ceil(numberFlat % (countFloor * countFlatOnFloor) / 4);
+  return console.log(`подъезд ${ numberEntrance } этаж ${ floor}`);
 };
 
-getEntrance(9, 6, 4, 183);
+getEntrance(9, 4, 109);
