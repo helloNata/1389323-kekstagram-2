@@ -34,9 +34,23 @@ const getPozitiveInteger = function(text) {
 //номер квартиры
 
 const getEntrance = (countFloor, countFlatOnFloor, numberFlat) => {
-  const numberEntrance = Math.ceil(numberFlat / (countFloor * countFlatOnFloor));
-  const floor = (numberFlat % (countFloor * countFlatOnFloor) === 0) ? 9 : Math.ceil(numberFlat % (countFloor * countFlatOnFloor) / 4);
-  return console.log(`подъезд ${ numberEntrance } этаж ${ floor}`);
+  const countFlatInEntrance = countFloor * countFlatOnFloor;
+  const numberEntrance = Math.ceil(numberFlat / countFlatInEntrance);
+  const floor = (numberFlat % countFlatInEntrance === 0) ? numberFlat : Math.ceil(numberFlat % countFlatInEntrance / 4);
+  return {numberEntrance, floor};
 };
 
-getEntrance(9, 4, 109);
+//console.log(getEntrance(9, 4, 109));
+
+// task 5
+
+const formatNumber = (userNumber) => {
+  const formatUserNumber = String(userNumber).split('').reverse().map((item, index) => {
+    item = ((index - 2) % 3 === 0) ? ` ${item}` : item;
+    return item;
+  }).reverse().join('');
+
+  return formatUserNumber;
+};
+
+console.log(formatNumber(1115467805));
